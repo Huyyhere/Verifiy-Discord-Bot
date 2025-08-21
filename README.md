@@ -1,464 +1,199 @@
-# 🔐 Discord Verification Bot - Complete Setup Guide
+🌟 Discord Verification Bot 🌟
+A simple Discord bot for member verification, assigning an "unverified" role to new members and granting a "verified" role upon verification via button or reaction. Supports bilingual messages (English/Vietnamese) and customizable embeds with thumbnails. 🚀
+✨ Features
 
-## 📋 Table of Contents
-- [✨ Features](#-features)
-- [🛠 Installation](#-installation)
-- [⚙️ Configuration](#️-configuration)
-- [🤖 Commands](#-commands)
-- [🚀 Quick Start](#-quick-start)
-- [🔧 Troubleshooting](#-troubleshooting)
+🔐 Verification: Verify via button or reaction, with optional CAPTCHA.
+🎭 Role Management: Auto-assigns "unverified" role to new members, grants "verified" role after verification, and restores roles for returning members.
+🌍 Bilingual Support: English (language-en.json) and Vietnamese (language-vi.json).
+🖼️ Custom Embeds: Supports main image and thumbnail (disable with "None").
+💌 DM Notifications: Sends welcome messages on verification or role restoration.
+📊 Logging: Logs events to a channel and bot.log, tracks verification stats.
 
----
+📦 Requirements
 
-## ✨ Features
+🐍 Python: 3.8+ (python.org).
+📚 Library: discord.py (pip install discord.py).
+🔑 Bot Token: From Discord Developer Portal.
+🏠 Discord Server: Bot needs specific permissions (see Bot Permissions).
 
-### 🌟 Core Features
-- **100% Slash Commands** - Modern Discord interaction system
-- **Dual Language Support** - English & Vietnamese (automatic detection)
-- **Advanced Verification System** - Quick verify & Captcha verification
-- **Smart DM System** - Only sends success notifications when verified
-- **Persistent Buttons** - Work even after bot restarts
-- **Anti-Spam Protection** - Cooldown system prevents abuse
-- **Role Restoration** - Automatically restores roles for returning verified users
+📂 Project Structure
+├── config.json
+├── language-en.json
+├── language-vi.json
+├── features/
+│   ├── utils.py
+├── main.py
+├── bot.log (auto-generated)
+├── data/
+│   ├── verified_users.json (auto-generated)
 
-### 📊 Analytics & Management
-- **Detailed Statistics** - Daily, weekly, monthly, and all-time stats
-- **Language Analytics** - Track user language preferences
-- **Method Tracking** - Monitor verification method usage
-- **Data Export** - Export verification data as JSON/CSV
-- **Comprehensive Logging** - Complete audit trail
+🔧 Setup
 
-### 🛡️ Security Features
-- **Cooldown Protection** - Prevents spam attempts
-- **Math Captcha** - Additional security verification
-- **Permission Validation** - Admin commands properly secured
-- **Data Backups** - Automatic backup system
+Install Python: Download 3.8+ from python.org.
+Install discord.py:pip install discord.py
 
----
 
-## 🛠 Installation
+Clone Repository: Download or clone this repo to your machine.
+Configure: Update config.json and language files (see Configuration).
+Invite Bot: Create a bot at Discord Developer Portal, copy the token to config.json, and invite it to your server with required permissions.
+Run Bot:python main.py
 
-### Step 1: Prerequisites
-```bash
-# Python 3.8+ required
-python --version
+Check bot.log for startup messages (e.g., "Loaded Vietnamese language file").
 
-# Install dependencies
-pip install discord.py
-```
-
-### Step 2: Discord Bot Setup
-1. Go to [Discord Developer Portal](https://discord.com/developers/applications)
-2. Create New Application → Bot
-3. Copy Bot Token
-4. Enable Privileged Gateway Intents:
-   - ✅ SERVER MEMBERS INTENT
-   - ✅ MESSAGE CONTENT INTENT
-
-### Step 3: Bot Permissions
-Required permissions (Permission Integer: `2148100160`):
-- ✅ Manage Roles
-- ✅ Send Messages  
-- ✅ Use Slash Commands
-- ✅ Manage Messages
-- ✅ Read Message History
-- ✅ Embed Links
-
-### Step 4: Invite Bot
-```
-https://discord.com/api/oauth2/authorize?client_id=YOUR_BOT_ID&permissions=2148100160&scope=bot%20applications.commands
-```
-
----
-
-## ⚙️ Configuration
-
-### config.json Setup
-```json
+⚙️ Configuration
+📝 config.json
+Edit config.json to match your server:
 {
-  "TOKEN": "YOUR_BOT_TOKEN_HERE",
-  "DEFAULT_SERVER_NAME": "Your Server Name",
-  
+  "TOKEN": "YOUR_BOT_TOKEN",
+  "SERVER_NAME": "Your Server",
+  "GUILD_ID": 123456789012345678,
   "CHANNELS": {
     "verify": 123456789012345678,
-    "log": 123456789012345679
+    "log": 123456789012345678
   },
-  
   "ROLES": {
-    "verify": 123456789012345680,
-    "member": 123456789012345681,
-    "unverified": 123456789012345682
+    "verify": 123456789012345678,
+    "unverified": 123456789012345678
   },
-  
   "LINKS": {
-    "verify_image": "https://your-image-url.com/verify.png",
-    "server_icon": "https://your-server-icon.com/icon.png"
+    "verify_image": "https://example.com/image.jpg",
+    "server_icon": "https://example.com/icon.png",
+    "thumbnail": "None"
   },
-  
+  "DATA": {
+    "folder": "data",
+    "verified_users_file": "data/verified_users.json"
+  },
   "SETTINGS": {
     "verification_cooldown": 30,
-    "enable_captcha": true,
+    "enable_captcha": false,
     "auto_role_restoration": true,
-    "log_verifications": true,
-    "enable_dm_notifications": true
+    "default_language": "vi",
+    "enable_dm_notifications": true,
+    "max_verification_attempts": 3,
+    "verification_timeout": 300,
+    "button_emoji": "✅",
+    "verification_type": "button"
   }
 }
-```
 
-### Getting Discord IDs
-1. Enable Developer Mode in Discord
-2. Right-click → Copy ID on:
-   - Channels (verify, log)
-   - Roles (verify, member, unverified)
 
-### Required Server Setup
-**Roles to Create:**
-- `Verified` - Given to verified users
-- `Member` - Additional member role  
-- `Unverified` - New users (optional)
+🔑 TOKEN: Bot token from Discord Developer Portal.
+🏠 SERVER_NAME: Your server’s name (e.g., "PAWII").
+🆔 GUILD_ID: Server ID (right-click server > Copy ID).
+📢 CHANNELS:
+verify: ID of verification channel.
+log: ID of logging channel.
 
-**Channels to Create:**
-- `#verify` - Verification channel
-- `#logs` - Bot activity logs (optional)
 
----
+🎭 ROLES:
+verify: ID of role granted after verification.
+unverified: ID of role for new members.
 
-## 🤖 Commands
 
-### 👥 User Commands
+🖼️ LINKS:
+verify_image: URL for embed’s main image (optional).
+server_icon: URL for server icon in DMs (optional).
+thumbnail: URL for verification embed thumbnail, set to "None" to disable.
 
-#### `/verify`
-**Description**: Verify your account to access all channels  
-**Usage**: `/verify`  
-**Cooldown**: 30 seconds (configurable)
 
-#### `/language`
-**Description**: Change your language preference  
-**Usage**: `/language en` or `/language vi`  
-**Options**:
-- 🇺🇸 `en` - English
-- 🇻🇳 `vi` - Tiếng Việt
+📁 DATA: Paths for user data (keep default).
+⚙️ SETTINGS:
+verification_cooldown: Seconds to wait before retrying.
+enable_captcha: true for CAPTCHA, false for direct verification.
+auto_role_restoration: true to restore roles for returning members.
+default_language: "vi" (Vietnamese) or "en" (English).
+enable_dm_notifications: true to send DMs.
+max_verification_attempts: Max CAPTCHA attempts.
+verification_timeout: CAPTCHA timeout (seconds).
+button_emoji: Emoji for button/reaction (e.g., "✅", "🔓", or "<:name:id>").
+verification_type: "button" or "reaction".
 
-### 👑 Admin Commands
 
-#### `/setup`
-**Description**: Setup verification system in current server  
-**Usage**: `/setup`  
-**Permission**: Administrator  
-**Function**: Creates verification message with buttons
 
-#### `/stats [period]`
-**Description**: View detailed verification statistics  
-**Usage**: `/stats today`, `/stats week`, `/stats month`, `/stats all`  
-**Permission**: Manage Server  
-**Shows**: Verifications count, methods used, language distribution
+🌐 Language Files
 
-#### `/userinfo [user]`
-**Description**: Get detailed user verification information  
-**Usage**: `/userinfo @user` or `/userinfo`  
-**Permission**: Manage Server  
-**Shows**: Verification status, method used, timestamps
-
-#### `/reload`
-**Description**: Reload bot configuration without restart  
-**Usage**: `/reload`  
-**Permission**: Administrator  
-**Function**: Reloads config.json changes
-
-#### `/export [format]`
-**Description**: Export verification data  
-**Usage**: `/export json` or `/export csv`  
-**Permission**: Administrator  
-**Output**: Downloads data file with all verification records
-
----
-
-## 🚀 Quick Start
-
-### 1. Download & Setup
-```bash
-# Create project folder
-mkdir discord-verification-bot
-cd discord-verification-bot
-
-# Download bot files
-# bot.py, config.json
-
-# Install dependencies
-pip install discord.py
-```
-
-### 2. Configure Bot
-```json
-{
-  "TOKEN": "YOUR_ACTUAL_BOT_TOKEN",
-  "DEFAULT_SERVER_NAME": "My Discord Server",
-  "CHANNELS": {
-    "verify": 1234567890123456789,
-    "log": 1234567890123456790
-  },
-  "ROLES": {
-    "verify": 1234567890123456791,
-    "member": 1234567890123456792,
-    "unverified": 1234567890123456793
-  }
+Files: language-en.json (English) and language-vi.json (Vietnamese).
+Purpose: Define text for embeds, DMs, and logs.
+Editing:
+Open language-vi.json or language-en.json in a text editor.
+Modify text in keys like welcome_embed.title, verification.successful, etc.
+Example (Vietnamese):"welcome_embed": {
+  "title": "Chào mừng đến {server_name}",
+  "description": "Nhấn nút hoặc phản ứng để xác minh!"
 }
-```
 
-### 3. Run Bot
-```bash
-python bot.py
-```
 
-### 4. Setup Verification
-1. Run `/setup` in your Discord server
-2. Bot creates verification message in #verify channel
-3. Users can now click buttons to verify
-4. Test the system yourself!
+Ensure all required keys (welcome_embed, verification, etc.) remain to avoid errors.
+Save and restart bot to apply changes.
 
----
 
-## 🔄 Verification Flow
 
-### New User Journey
-1. **User Joins** → Gets "Unverified" role (if configured)
-2. **Goes to #verify** → Sees verification message with buttons
-3. **Chooses Method**:
-   - ✅ **Quick Verify** - Instant (1-click)
-   - 🔐 **Captcha Verify** - Solve math problem
-4. **Success** → Gets roles + welcome DM
-5. **Full Access** → Can use all channels
+🤖 Bot Permissions
+The bot requires these Discord permissions:
 
-### Returning User
-- Bot automatically detects previously verified users
-- Restores verification status immediately
-- No need to verify again
+📜 Manage Roles: To assign/remove unverified and verify roles.
+💬 Send Messages: To send verification embed and logs.
+🔗 Embed Links: For rich embeds.
+😊 Add Reactions: For reaction-based verification.
+📖 Read Message History: To detect reactions.
 
----
+Setup: In Discord Developer Portal, generate an invite link with these permissions and add the bot to your server.
+💬 Bot Messages
+Messages depend on default_language ("vi" or "en"):
 
-## 📊 Analytics Dashboard
+Verification Embed (in verify channel):
+🇻🇳: "Chào mừng đến {server_name}\nXác minh để truy cập tất cả kênh.\nNhấn nút bên dưới hoặc thêm phản ứng để được xác minh:"
+🇬🇧: "Welcome to {server_name}\nVerify to access all channels.\nClick the button below or add a reaction to get verified:"
 
-### Available Statistics
-- **Daily**: Today's verification count
-- **Weekly**: Past 7 days verification count  
-- **Monthly**: Past 30 days verification count
-- **All Time**: Total verifications since setup
 
-### Method Tracking
-- Quick Verify usage
-- Captcha Verify usage
-- Slash command usage
+CAPTCHA (if enabled):
+🇻🇳: "Xác Minh Bảo Mật\nGiải bài toán: {num1} + {num2} = ?"
+🇬🇧: "Security Verification\nSolve: {num1} + {num2} = ?"
 
-### Language Distribution  
-- English users count
-- Vietnamese users count
-- User language preferences
 
----
+DM Notifications:
+Success (🇻🇳): "Xác Minh Thành Công!\nChúc mừng! Bạn đã được xác minh trong {server_name}."
+Success (🇬🇧): "Verification Successful!\nYou have been verified in {server_name}."
+Welcome Back (🇻🇳): "Chào Mừng Trở Lại!\nTrạng thái xác minh đã được khôi phục."
 
-## 🔧 Troubleshooting
 
-### Common Issues
+Logs (in log channel):
+🇻🇳: "Người Dùng Đã Xác Minh\nNgười dùng: {user_mention}\nPhương thức: {method}"
+🇬🇧: "User Verified\nUser: {user_mention}\nMethod: {method}"
 
-#### ❌ "Bot Not Responding"
-**Causes:**
-- Bot offline
-- Missing permissions
-- Invalid token
 
-**Solutions:**
-- Check bot status in Discord
-- Verify bot permissions
-- Confirm token in config.json
-- Check console logs
+Errors:
+🇻🇳: "Bạn đã được xác minh rồi!" or "Vui lòng chờ {seconds} giây."
+🇬🇧: "You are already verified!" or "Please wait {seconds} seconds."
 
-#### ❌ "Buttons Not Working"
-**Causes:**
-- Bot restarted recently
-- Permission issues
-- Channel misconfiguration
 
-**Solutions:**
-- Run `/setup` again
-- Check "Use Slash Commands" permission
-- Verify channel IDs in config
 
-#### ❌ "Roles Not Assigned"
-**Causes:**
-- Bot role hierarchy too low
-- Missing "Manage Roles" permission
-- Invalid role IDs
+📚 How It Works
 
-**Solutions:**
-- Move bot role above assigned roles
-- Check role permissions
-- Verify role IDs in config.json
+🔐 Verification:
+Button (verification_type: "button"): Shows a button with button_emoji.
+Reaction (verification_type: "reaction"): Bot adds button_emoji for users to react.
+CAPTCHA (if enabled): Solve a math problem to verify.
 
-#### ❌ "No DM Received"
-**Causes:**
-- User has DMs disabled
-- Bot lacks DM permissions
 
-**Solutions:**
-- This is normal Discord behavior
-- Users must enable DMs from server members
-- Bot logs will show "DMs disabled"
+🎭 Roles: Assigns unverified to new members, grants verify on verification, restores roles for returning users.
+🌍 Language: Uses language-vi.json or language-en.json based on default_language.
+📊 Logging: Logs events to bot.log and log channel, tracks verification stats.
 
-### Error Messages Guide
-- `Missing Permissions` → Check bot permissions
-- `Role Not Found` → Verify role IDs in config
-- `Channel Not Found` → Verify channel IDs in config
-- `Invalid Token` → Check bot token in config
+🛠️ Troubleshooting
 
----
+Bot Won’t Start: Check bot.log for errors, ensure config.json has valid TOKEN, IDs.
+No Verification Message: Verify verify channel ID and bot permissions (Send Messages, Embed Links).
+Language Errors: Ensure language-en.json and language-vi.json exist with all keys.
+Thumbnail Missing: Check LINKS.thumbnail for valid URL or set to "None".
+Reaction Issues: Ensure bot has Add Reactions permission and button_emoji is valid.
 
-## 🎨 Customization
+🎨 Customization
 
-### Language System
-- Easy to add new languages
-- Per-user language preferences
-- Automatic language detection
-- Fallback to English
+🔄 Verification Type: Set verification_type to "button" or "reaction".
+🖼️ Embed: Update verify_image, thumbnail in config.json, or edit welcome_embed in language files.
+⚙️ Settings: Adjust enable_captcha, default_language, etc. in config.json.
 
-### Message Customization
-Edit language dictionaries in bot.py:
-```python
-"verification_successful": "🎉 Your custom success message!",
-"welcome_title": "🔐 Welcome to {server_name}",
-```
 
-### Visual Customization
-- Custom verification images
-- Server-specific branding
-- Configurable embed colors
-- Custom footer messages
-
-### Advanced Settings
-```json
-"SETTINGS": {
-  "verification_cooldown": 30,        // Cooldown in seconds
-  "enable_captcha": true,             // Enable captcha option
-  "auto_role_restoration": true,      // Auto-restore roles
-  "log_verifications": true,          // Log to channel
-  "enable_dm_notifications": true,    // Send success DMs
-  "max_verification_attempts": 3,     // Max attempts per user
-  "verification_timeout": 300         // Modal timeout
-}
-```
-
----
-
-## 📝 File Structure
-
-```
-discord-verification-bot/
-├── bot.py                 # Main bot file
-├── config.json           # Configuration
-├── bot.log              # Bot logs
-├── data/                # Data storage
-│   ├── verified_users.json
-│   ├── user_languages.json
-│   └── analytics.json
-└── README.md           # This guide
-```
-
----
-
-## 🔐 Security Best Practices
-
-### Bot Token Security
-- ❌ Never share your bot token
-- ❌ Don't commit token to public repositories
-- ✅ Use environment variables in production
-- ✅ Regenerate token if compromised
-
-### Permission Management
-- ✅ Give bot minimum required permissions
-- ✅ Regularly audit bot permissions
-- ✅ Use role hierarchy properly
-- ✅ Monitor bot activity logs
-
-### Data Protection
-- ✅ Regular data backups (automatic)
-- ✅ Secure file permissions
-- ✅ Monitor unusual activity
-- ✅ Keep logs for troubleshooting
-
----
-
-## ❓ FAQ
-
-**Q: Can I use this on multiple servers?**  
-A: Yes, but each server needs separate role/channel IDs in config.
-
-**Q: How do I backup my data?**  
-A: Bot auto-backups data. Manual backup: copy `data/` folder.
-
-**Q: Can I modify verification requirements?**  
-A: Yes, edit the `verify_user()` method in bot.py.
-
-**Q: What if someone loses verification?**  
-A: Run `/userinfo @user` to check status, manually assign roles if needed.
-
-**Q: How do I add more languages?**  
-A: Edit the `LanguageManager` class in bot.py with new language dictionary.
-
-**Q: Can I customize the verification message?**  
-A: Yes, edit the language dictionaries and re-run `/setup`.
-
----
-
-## 🚀 Quick Commands Reference
-
-| Command | Purpose | Permission |
-|---------|---------|------------|
-| `/verify` | Verify account | Everyone |
-| `/language` | Change language | Everyone |
-| `/setup` | Setup verification | Admin |
-| `/stats` | View statistics | Manage Server |
-| `/userinfo` | User details | Manage Server |
-| `/reload` | Reload config | Admin |
-| `/export` | Export data | Admin |
-
----
-
-## 🎯 Pro Tips
-
-### For Server Owners
-- Set clear verification channel permissions
-- Use verification channel for announcements
-- Monitor verification statistics regularly
-- Keep bot logs for troubleshooting
-
-### For Users
-- Enable DMs to receive success notifications
-- Use `/language` to set preferred language
-- Contact admins if verification fails
-- Check cooldown timer before retrying
-
-### For Developers
-- Check logs for error details
-- Test changes in development server
-- Backup data before major updates
-- Monitor bot performance metrics
-
----
-
-## 📞 Support
-
-### Getting Help
-1. Check this documentation first
-2. Review bot logs for errors
-3. Verify Discord permissions
-4. Test in a development server
-
-### Reporting Issues
-Include in your report:
-- Error messages from logs
-- Bot configuration (hide token)
-- Steps to reproduce issue
-- Discord server setup details
-
----
-
-**🎉 Congratulations! Your Discord Verification Bot is now ready to secure your server!**
+⭐ Star this repo if you find it helpful! For issues, check bot.log or open a GitHub issue. 🎉
