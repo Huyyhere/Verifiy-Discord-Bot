@@ -1,0 +1,33 @@
+{
+  "TOKEN": "YOUR_DISCORD_BOT_TOKEN",
+  "SERVER_NAME": "YOUR_SERVER_NAME",
+  "GUILD_ID": 123456789012345678,
+  "CHANNELS": {
+    "verify": 123456789012345678,
+    "log": 123456789012345678
+  },
+  "ROLES": {
+    "verify": 123456789012345678,
+    "unverified": 123456789012345678
+  },
+  "LINKS": {
+    "verify_image": "https://example.com/verify-banner.png",
+    "server_icon": "https://example.com/server-icon.png",
+    "thumbnail": "None"
+  },
+  "DATA": {
+    "folder": "data",
+    "verified_users_file": "data/verified_users.json"
+  },
+  "SETTINGS": {
+    "verification_cooldown": 30,
+    "enable_captcha": true,
+    "auto_role_restoration": true,
+    "default_language": "vi",
+    "enable_dm_notifications": true,
+    "max_verification_attempts": 3,
+    "verification_timeout": 300,
+    "button_emoji": "✅",
+    "verification_type": "button"
+  }
+}

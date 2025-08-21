@@ -1,0 +1,67 @@
+{
+    "config": {
+        "default_language": "vi",
+        "colors": {
+            "success": "#00FF00",
+            "error": "#FF0000", 
+            "warning": "#FFA500",
+            "info": "#00AAFF",
+            "primary": "#0099FF"
+        }
+    },
+    "verification": {
+        "successful": "🎉 Xác minh thành công! Chào mừng bạn đến với server!",
+        "already_verified": "✅ Bạn đã được xác minh rồi!",
+        "failed": "❌ Xác minh thất bại. Vui lòng thử lại sau.",
+        "role_not_found": "❌ Không tìm thấy role xác minh. Vui lòng liên hệ quản trị viên.",
+        "cooldown_message": "⏰ Vui lòng chờ {seconds} giây trước khi thử lại.",
+        "button_label": "Xác Minh Ngay",
+        "button_emoji": "✅"
+    },
+    "captcha": {
+        "title": "🔐 Xác Minh Bảo Mật",
+        "question": "Giải bài toán đơn giản này: {num1} + {num2} = ?",
+        "placeholder": "Nhập đáp án của bạn...",
+        "incorrect": "❌ Đáp án sai. Vui lòng thử lại.",
+        "invalid": "❌ Vui lòng nhập một số hợp lệ.",
+        "timeout": "⏰ Hết thời gian xác minh. Vui lòng thử lại."
+    },
+    "welcome_embed": {
+        "title": "🔐 Chào mừng đến {server_name}",
+        "description": "**Xác minh để truy cập tất cả kênh.**\nNhấn nút bên dưới để được xác minh:",
+        "field_title": "🛡️ Tại sao phải xác minh?",
+        "field_content": "Xác minh giúp bảo vệ server khỏi bot và các cuộc tấn công spam.",
+        "footer": "🔐 Hệ Thống Xác Minh {server_name}"
+    },
+    "dm_notifications": {
+        "verify_success": {
+            "title": "🎉 Xác Minh Thành Công!",
+            "description": "Chúc mừng! Bạn đã được xác minh thành công trong **{server_name}**.\n\nBây giờ bạn có toàn quyền truy cập vào tất cả kênh và tính năng!",
+            "features_title": "🎯 Bạn có thể làm gì bây giờ:",
+            "features_content": "• Truy cập tất cả kênh và danh mục\n• Tham gia kênh voice và các sự kiện\n• Gửi tin nhắn và tương tác với thành viên khác\n• Sử dụng lệnh bot và tính năng server",
+            "footer": "🏠 Chào mừng đến {server_name}!"
+        },
+        "welcome_back": {
+            "title": "🎉 Chào Mừng Trở Lại!",
+            "description": "Chào mừng bạn trở lại **{server_name}**!\n\nTrạng thái xác minh của bạn đã được tự động khôi phục vì bạn đã được xác minh trước đó.",
+            "status_title": "✅ Trạng Thái Hiện Tại",
+            "status_content": "Bạn có toàn quyền truy cập vào tất cả kênh và tính năng!",
+            "footer": "🏠 {server_name}"
+        }
+    },
+    "logging": {
+        "user_verified": {
+            "title": "✅ Người Dùng Đã Xác Minh",
+            "description": "**Người dùng:** {user_mention} ({user_name})\n**Phương thức:** {method}\n**Thời gian:** <t:{timestamp}:F>"
+        },
+        "auto_restoration": {
+            "title": "🔄 Khôi Phục Role Tự Động",
+            "description": "**Người dùng:** {user_mention} ({user_name})\n**Đã xác minh trước đây:** <t:{previous_timestamp}:R>\n**Phương thức gốc:** {method}"
+        }
+    },
+    "errors": {
+        "missing_permissions": "❌ Bot thiếu quyền cần thiết. Vui lòng liên hệ quản trị viên.",
+        "unknown_error": "❌ Đã xảy ra lỗi không mong muốn. Vui lòng thử lại hoặc liên hệ hỗ trợ.",
+        "guild_not_found": "❌ Lỗi cấu hình server. Vui lòng liên hệ quản trị viên."
+    }
+}

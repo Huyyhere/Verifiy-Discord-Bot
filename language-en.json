@@ -1,0 +1,67 @@
+{
+    "config": {
+        "default_language": "en",
+        "colors": {
+            "success": "#00FF00",
+            "error": "#FF0000", 
+            "warning": "#FFA500",
+            "info": "#00AAFF",
+            "primary": "#0099FF"
+        }
+    },
+    "verification": {
+        "successful": "🎉 Successfully verified! Welcome to the server!",
+        "already_verified": "✅ You are already verified!",
+        "failed": "❌ Verification failed. Please try again later.",
+        "role_not_found": "❌ Verification role not found. Please contact an administrator.",
+        "cooldown_message": "⏰ Please wait {seconds} seconds before trying again.",
+        "button_label": "Verify Now",
+        "button_emoji": "✅"
+    },
+    "captcha": {
+        "title": "🔐 Security Verification",
+        "question": "Solve this simple math problem: {num1} + {num2} = ?",
+        "placeholder": "Enter your answer...",
+        "incorrect": "❌ Incorrect answer. Please try again.",
+        "invalid": "❌ Please enter a valid number.",
+        "timeout": "⏰ Verification timed out. Please try again."
+    },
+    "welcome_embed": {
+        "title": "🔐 Welcome to {server_name}",
+        "description": "**Verify to access all channels.**\nClick the button below to get verified:",
+        "field_title": "🛡️ Why verify?",
+        "field_content": "Verification keeps our server secure from bots and spam attacks.",
+        "footer": "🔐 {server_name} Verification System"
+    },
+    "dm_notifications": {
+        "verify_success": {
+            "title": "🎉 Verification Successful!",
+            "description": "Congratulations! You have been successfully verified in **{server_name}**.\n\nYou now have full access to all channels and features!",
+            "features_title": "🎯 What you can do now:",
+            "features_content": "• Access all channels and categories\n• Join voice channels and participate in events\n• Send messages and interact with other members\n• Use bot commands and server features",
+            "footer": "🏠 Welcome to {server_name}!"
+        },
+        "welcome_back": {
+            "title": "🎉 Welcome Back!",
+            "description": "Welcome back to **{server_name}**!\n\nYour verification status has been automatically restored since you were previously verified.",
+            "status_title": "✅ Current Status",
+            "status_content": "You have full access to all channels and features!",
+            "footer": "🏠 {server_name}"
+        }
+    },
+    "logging": {
+        "user_verified": {
+            "title": "✅ User Verified",
+            "description": "**User:** {user_mention} ({user_name})\n**Method:** {method}\n**Time:** <t:{timestamp}:F>"
+        },
+        "auto_restoration": {
+            "title": "🔄 Auto Role Restoration", 
+            "description": "**User:** {user_mention} ({user_name})\n**Previously verified:** <t:{previous_timestamp}:R>\n**Original method:** {method}"
+        }
+    },
+    "errors": {
+        "missing_permissions": "❌ Bot is missing required permissions. Please contact an administrator.",
+        "unknown_error": "❌ An unexpected error occurred. Please try again or contact support.",
+        "guild_not_found": "❌ Server configuration error. Please contact an administrator."
+    }
+}
